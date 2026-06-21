@@ -55,3 +55,7 @@ build_metadata.AdditionalFiles.CssScope = b-yeiijebn2i
 [C:/Users/08/SistemaEscolar/src/SistemaEscolar.BlazorApp/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-qme3w3o5pg
+
+[C:/Users/08/SistemaEscolar/src/SistemaEscolar.BlazorApp/Components/Pages/Calificaciones.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDYWxpZmljYWNpb25lcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-lyxszkljxw

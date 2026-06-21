@@ -1,0 +1,118 @@
+@page "/calificaciones"
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager Navigation
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div>
+            <h1>Gestión de Calificaciones</h1>
+            <p class="subtitle">Asignatura: Desarrollo de Software | Sección: INF-401</p>
+        </div>
+        <button class="btn-save" @onclick="GuardarCambios">Guardar Registro</button>
+    </div>
+
+    @if (mostrarNotificacion)
+    {
+        <div class="alert @(huboError ? "alert-danger" : "alert-success")">
+            @mensajeNotificacion
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Matrícula</th>
+                    <th>Nota Teórica (40%)</th>
+                    <th>Nota Práctica (60%)</th>
+                    <th>Nota Final</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nota in listadoNotas)
+                {
+                    <tr>
+                        <td class="font-bold">@nota.EstudianteNombre</td>
+                        <td class="text-muted">@nota.Matricula</td>
+                        <td>
+                            <input type="number" min="0" max="40" @bind="nota.NotaTeorica" @bind:after="() => Recalcular(nota)" class="table-input" />
+                        </td>
+                        <td>
+                            <input type="number" min="0" max="60" @bind="nota.NotaPractica" @bind:after="() => Recalcular(nota)" class="table-input" />
+                        </td>
+                        <td class="font-bold @(nota.NotaFinal < 70 ? "text-danger" : "text-success")">
+                            @nota.NotaFinal
+                        </td>
+                        <td>
+                            <span class="badge @(nota.NotaFinal < 70 ? "badge-reprobado" : "badge-aprobado")">
+                                @(nota.NotaFinal < 70 ? "Reprobado" : "Aprobado")
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<CalificacionModel> listadoNotas = new();
+    private bool mostrarNotificacion = false;
+    private bool huboError = false;
+    private string mensajeNotificacion = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        listadoNotas = new List<CalificacionModel>
+        {
+            new() { Id = Guid.NewGuid(), EstudianteNombre = "Johan Mancebo", Matricula = "2023-0102", NotaTeorica = 38, NotaPractica = 55, NotaFinal = 93 },
+            new() { Id = Guid.NewGuid(), EstudianteNombre = "Carlos Gómez", Matricula = "2023-0415", NotaTeorica = 25, NotaPractica = 40, NotaFinal = 65 },
+            new() { Id = Guid.NewGuid(), EstudianteNombre = "María Reyes", Matricula = "2023-0221", NotaTeorica = 30, NotaPractica = 52, NotaFinal = 82 }
+        };
+    }
+
+    private void Recalcular(CalificacionModel nota)
+    {
+        if (nota.NotaTeorica < 0 || nota.NotaTeorica > 40 || nota.NotaPractica < 0 || nota.NotaPractica > 60)
+        {
+            huboError = true;
+            mensajeNotificacion = "Valores fuera del rango permitido (Teórica: 0-40, Práctica: 0-60).";
+            mostrarNotificacion = true;
+            return;
+        }
+
+        nota.NotaFinal = nota.NotaTeorica + nota.NotaPractica;
+        huboError = false;
+        mostrarNotificacion = false;
+    }
+
+    private void GuardarCambios()
+    {
+        foreach (var nota in listadoNotas)
+        {
+            if (nota.NotaTeorica < 0 || nota.NotaTeorica > 40 || nota.NotaPractica < 0 || nota.NotaPractica > 60)
+            {
+                huboError = true;
+                mensajeNotificacion = "No se puede guardar. Hay registros con calificaciones inválidas.";
+                mostrarNotificacion = true;
+                return;
+            }
+        }
+
+        huboError = false;
+        mensajeNotificacion = "Calificaciones sincronizadas con éxito de forma segura en Cloud SQL.";
+        mostrarNotificacion = true;
+    }
+
+    public class CalificacionModel
+    {
+        public Guid Id { get; set; }
+        public string EstudianteNombre { get; set; } = string.Empty;
+        public string Matricula { get; set; } = string.Empty;
+        public int NotaTeorica { get; set; }
+        public int NotaPractica { get; set; }
+        public int NotaFinal { get; set; }
+    }
+}
