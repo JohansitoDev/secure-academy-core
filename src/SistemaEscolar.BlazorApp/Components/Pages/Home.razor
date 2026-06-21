@@ -1,0 +1,176 @@
+﻿@page "/"
+
+<PageTitle>Liceo Tecnológico - Inicio</PageTitle>
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="badge-promo">Admisiones Abiertas Periodo Académico</span>
+        <h1>Formando Líderes en Ciberseguridad y Desarrollo</h1>
+        <p>Impulsamos las competencias técnicas de nuestros estudiantes mediante planes curriculares avanzados, infraestructura en la nube de alta disponibilidad y metodologías prácticas rigurosas.</p>
+        <div class="hero-actions">
+            <a href="#oferta" class="btn-primary">Ver Carreras Técnicas</a>
+            <a href="#contacto" class="btn-secondary">Contactar un Asesor</a>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-card"><h3>+1,200</h3><p>Estudiantes Activos</p></div>
+        <div class="stat-card"><h3>98%</h3><p>Inserción Laboral</p></div>
+        <div class="stat-card"><h3>100%</h3><p>Infraestructura Cloud</p></div>
+    </div>
+</section>
+
+<section id="oferta" class="features-section">
+    <div class="section-header">
+        <h2>Especializaciones Tecnológicas</h2>
+        <p>Nuestros bachilleratos técnicos responden directamente a las altas demandas del mercado global.</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="card">
+            <div class="card-icon">💻</div>
+            <h3>Desarrollo de Software</h3>
+            <p>Modelado de base de datos distribuidas, programación orientada a objetos, arquitecturas limpias y tecnologías web modernas.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>Ciberseguridad & Redes</h3>
+            <p>Análisis forense digital, auditorías de seguridad, protección de perímetros y control de brechas críticas según estándares OWASP.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3>Inteligencia Artificial & Cloud</h3>
+            <p>Introducción a modelos de machine learning, computación en la nube empleando infraestructuras robustas y DevOps.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+  
+    .hero {
+        padding: 5rem 2rem;
+        background: radial-gradient(circle at top right, #f0f9ff 0%, #ffffff 100%);
+        text-align: center;
+    }
+    .hero-content {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    .badge-promo {
+        background-color: #e0f2fe;
+        color: #0369a1;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    .hero h1 {
+        font-size: 3rem;
+        color: #0f172a;
+        margin: 1.5rem 0;
+        font-weight: 800;
+        line-height: 1.15;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        color: #475569;
+        line-height: 1.6;
+        margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+    .btn-primary {
+        background-color: #0284c7;
+        color: white;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+    .btn-secondary {
+        background-color: #f1f5f9;
+        color: #334155;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+        border: 1px solid #cbd5e1;
+    }
+    
+    /* Stats */
+    .stats-section {
+        background-color: #f8fafc;
+        padding: 3rem 2rem;
+        border-y: 1px solid #e2e8f0;
+    }
+    .stats-grid {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+    }
+    .stat-card h3 {
+        font-size: 2.5rem;
+        color: #0284c7;
+        margin: 0;
+    }
+    .stat-card p {
+        color: #64748b;
+        margin: 0.5rem 0 0 0;
+        font-weight: 500;
+    }
+
+    /* Oferta */
+    .features-section {
+        max-width: 1200px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+    }
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    .section-header h2 {
+        font-size: 2rem;
+        color: #0f172a;
+    }
+    .section-header p {
+        color: #64748b;
+    }
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    .card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 2.5rem;
+        border-radius: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+    }
+    .card-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    .card h3 {
+        color: #0f172a;
+        margin-bottom: 0.75rem;
+    }
+    .card p {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+</style>

@@ -1,0 +1,103 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">🏫 Liceo Tecnológico</div>
+            <div class="nav-links">
+                <a href="/">Inicio</a>
+                <a href="#oferta">Oferta Académica</a>
+                <a href="#admisiones">Admisiones</a>
+                
+                @if (!isLoggedIn)
+                {
+                    <button class="btn-login" @onclick="ToggleLoginModal">Entrar al Sistema</button>
+                }
+                else
+                {
+                    <div class="user-badge">
+                        <span class="user-info">@userName <small class="role-tag">@userRole</small></span>
+                        <button class="btn-logout" @onclick="Logout">Salir</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+
+    @if (showLoginModal && !isLoggedIn)
+    {
+        <div class="login-overlay">
+            <div class="login-card">
+                <div class="login-header">
+                    <h3>Portal de Acceso</h3>
+                    <p>Introduce tus credenciales institucionales</p>
+                    <button class="close-btn" @onclick="ToggleLoginModal">&times;</button>
+                </div>
+                
+                <div class="login-body">
+                    <div class="form-group">
+                        <label>Correo Electrónico o Código</label>
+                        <input type="email" placeholder="ejemplo@liceo.edu.do" @bind="loginEmail" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="••••••••" @bind="loginPassword" class="form-control" />
+                    </div>
+                    
+                    <div class="role-selector">
+                        <label>Acceder como:</label>
+                        <select @bind="selectedRole" class="form-control">
+                            <option value="Estudiante">Estudiante (Johan Mancebo)</option>
+                            <option value="Profesor">Profesor (Ing. Martínez)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-submit" @onclick="ProcessLogin">Iniciar Sesión Seguro</button>
+                    <p class="security-notice">🔒 Conexión cifrada de extremo a extremo con Cloud SQL</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <main class="main-content">
+        @Body
+    </main>
+
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year Liceo Tecnológico - Sistema de Gestión Escolar Segura</p>
+    </footer>
+</div>
+
+@code {
+    private bool showLoginModal = false;
+    private bool isLoggedIn = false;
+    private string userName = "";
+    private string userRole = "";
+
+    // Inputs del Login
+    private string loginEmail = "";
+    private string loginPassword = "";
+    private string selectedRole = "Estudiante";
+
+    private void ToggleLoginModal() => showLoginModal = !showLoginModal;
+
+    private void ProcessLogin()
+    {
+        // Validación básica visual
+        if (string.IsNullOrWhiteSpace(loginEmail)) return;
+
+        isLoggedIn = true;
+        showLoginModal = false;
+        userRole = selectedRole;
+        userName = selectedRole == "Estudiante" ? "Johan Mancebo" : "Profesor Carlos Martínez";
+    }
+
+    private void Logout()
+    {
+        isLoggedIn = false;
+        userName = "";
+        userRole = "";
+        loginEmail = "";
+        loginPassword = "";
+    }
+}
